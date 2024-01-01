@@ -1,0 +1,94 @@
+{% extends 'core/base.html' %}
+{% block title %}
+Tables
+{% endblock %}
+{% block content %}
+{% load static %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div  >
+
+    <!--
+    <h3>Dashbord/Table/Last</h3>
+       <form method="post" id="my-form" >
+        {% csrf_token %}
+        {{form}}
+    </form>
+    -->
+</div>
+
+
+<div>
+    <div class="relative overflow-x-auto">
+    <table class="border-collapse w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3 border border-slate-300">
+                    Nom
+                </th>
+                <th scope="col" class="px-6 py-3 border border-slate-300">
+                    Temperature
+                </th>
+                <th scope="col" class="px-6 py-3 border border-slate-300">
+                    Humidity
+                </th>
+                <th scope="col" class="px-6 py-3 border border-slate-300">
+                    Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for valeur in derniere_ligne %}
+            <tr class="bg-white dark:bg-gray-800">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border border-slate-300">
+                    <a href="{% url 'DHT:myChart' %}" >DHT 11</a>
+                </th>
+                <td class="px-6 py-4 border border-slate-300">
+                    {{ valeur.temp }}
+                </td>
+                <td class="px-6 py-4 border border-slate-300">
+                    {{ valeur.hum }}
+                </td>
+                <td class="px-6 py-4 border border-slate-300">
+                    {{ valeur.date }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+    <br>
+    <div>
+<a href="{% url 'DHT:download_csv' %}"  class="m-4 px-6 py-3 text-base font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700" >Télecharger csv</a>
+</div>
+  </div>
+
+  <script>
+
+    var selectEl = $('#mon_select');
+
+    selectEl.change(function() {
+        $('#my-form').submit();
+    });
+
+    var downloadButton = document.getElementById('csv');
+downloadButton.addEventListener('click', function() {
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '/download_csv/', true);
+xhr.responseType = 'blob';
+xhr.onload = function() {
+if (xhr.status === 200) {
+  var url = window.URL.createObjectURL(xhr.response);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'model_values.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+};
+xhr.send();
+});
+
+
+</script>
+{% endblock  %}

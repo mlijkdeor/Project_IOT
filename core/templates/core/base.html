@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css"  rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+        <title>{% block title %} {% endblock %} | Project IOT</title>
+    </head>
+    <body class="bg-slate-100">
+        <nav class="px-6 py-6 flex justify-between bg-cyan-200 items-center border-b border-gray-200">
+                <a href="/" class="text-xl font-semibold">Project IOT</a>
+
+                <div class="space-x-6">
+
+                    <a href="/table/" class="text-base font-semibold hover:text-gray-500">Index</a>
+                    <a href="/new/" class="text-base font-semibold hover:text-gray-500">New Measure</a>
+
+                    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">My charts <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown menu -->
+                    <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                            <li>
+                                <a href="/myChartTemp/" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Temperature</a>
+                            </li>
+                            <li>
+                                <a href="/myChartHum/" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Humidity</a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    {% if request.user.is_authenticated %}
+                    <a href="#" class="px-6 py-3 text-base font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-600">Inbox</a>
+                    <a href="" class="px-6 py-3 text-base font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Dashboard</a>
+                    {% else %}
+                    <a href="{% url 'core:signup' %}" class="px-6 py-3 text-base font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-600">Sign up</a>
+                    <a href="{% url 'core:login' %}" class="px-6 py-3 text-base font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Log in</a>
+                    {% endif %}
+                </div>
+        </nav>
+
+        <div class="px-6 py-6">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <footer class="py-6 px-6 flex justify-between bg-emerald-800">
+            <div class="w-2/3 pr-10">
+                <h3 class="mb-5 font-semibold text-gray-400">About</h3>
+
+                <p class="text-lg text-teal-500">Lorem ipsum   Your project may not work properly until you apply the migrations for app(s). </p>
+            </div>
+            <div class="ml-5">
+                <h3 class="mb-3 font-semibold text-gray-400">Menu</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-base text-teal-500 hover:text-teal-700">About</a> </li>
+                    <li><a href="#" class="text-base text-teal-500 hover:text-teal-700">Privacy policy</a> </li>
+                </ul>
+            </div>
+        </footer>
+    </body>
+</html>
