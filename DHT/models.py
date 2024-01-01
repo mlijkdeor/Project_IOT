@@ -9,7 +9,7 @@ class Dht11(models.Model):
 
     def save(self, *args, **kwargs):
         account_sid = 'AC5549a959e157ad17791dc46c016a5b80'
-        auth_token = '74bec0983cb618072a943c3ca00d6b78'
+        auth_token = 'a0405ac2d7c6992fe00a3f8193008deb'
         client = Client(account_sid, auth_token)
 
         if (self.temp > 10 and self.hum > 20):
