@@ -1,7 +1,42 @@
 {% extends 'core/base.html' %}
-
+{% load static  %}
 {% block title %} Welcome {% endblock %}
 
 {% block content %}
-<h1>The front page</h1>
+
+<div class="flex flex-row">
+  <div class="w-2/5 mt-2">
+    <img src="{% static 'core/images/DHT11.png' %}">
+  </div>
+  <div class=" w-3/5">
+      <div>
+          <h1 class="font-bold text-center mt-5 mb-3 text-blue-600 text-xl">Introduction sur le DHT11 : <i class="px-3 fa-solid fa-temperature-high"></i></h1>
+          <p class="font-normal text-neutral-950"><span class="font-bold text-blue-600">Le capteur DHT11 </span> est un capteur de <span class="font-bold text-red-600">température</span> et d'<span class="font-bold text-red-400">humidité</span>. Il permet la mesure de ces grandeurs physiques avec précision. Il est souvent vendu sur une carte support qui possède <span class="font-bold text-lime-600">3 broches.</span> Il communique avec l’<span class="font-bold text-blue-600">Arduino</span> très simplement au travers d’une de ses entrées numériques.
+    La broche principale est celle qui fournit les <span class="font-bold text-blue-600">DATA</span>. Les 2 autres broches sont pour son alimentation <span class="font-bold text-blue-600">5V</span> et la masse <span class="font-bold text-blue-600">GND</span>. <br>
+              Le module <span class="font-bold text-blue-600">DHT11</span> est facile à utiliser avec les cartes <span class="font-bold text-blue-600">Arduino</span>, <span class="font-bold text-indigo-600">Raspberry,</span> <span class="font-bold text-indigo-600">Pi</span> et <span class="font-bold text-indigo-600">Nodemcu</span>. Au niveau logiciel, il existe des bibliothèques pour Arduino avec prise en charge du protocole <span class="font-bold">“Single bus”.</span> <br>
+       En ce qui concerne le matériel, il suffit de connecter la broche d’alimentation VCC à 3 ou 5V, la broche GND à la masse (0V) et la broche de données à une broche numérique.</p>
+          <h1 class="font-bold text-center mt-5 mb-3 text-blue-600 text-xl">Spécifications et caractéristiques: <i class="px-3 fa-solid fa-list"></i></h1>
+
+
+
+         <ul class="list-disc px-4">
+            <li>Tension de fonctionnement : 3,5 V à 5,5 V</li>
+             <li>Plage de mesure de l’humidité : 20 % à 90 % HR (erreur de mesure de l’humidité : +-5 %)</li>
+             <li>Résolution de mesure de l’humidité : 1 % HR/li>
+             <li>Tension de fonctionnement : 3,5 V à 5,5 V</li>
+             <li>Erreur de mesure de température : +-2°</li>
+             <li>Résolution de mesure de température : 1 ºC</li>
+             <li>Portée de transmission du signal : 20 mètres</li>
+             <li>Dimensions : 19 mm x 17 mm x 19 mm</li>
+             <li>Poids : 3g</li>
+        </ul>
+         </div>
+</div>
+  </div>
+<div class=" flex flex-center flex-col">
+
+
+</div>
+
+
 {% endblock %}

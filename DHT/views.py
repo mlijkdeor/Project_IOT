@@ -49,7 +49,7 @@ def chart_data(request):
     dht = Dht11.objects.all()
 
     data = {
-        'temps': [Dt.dt for Dt in dht],
+        'temps': [Dt.dt.strftime("%d/%m/%y") for Dt in dht],
         'temperature': [Temp.temp for Temp in dht],
         'humidity': [Hum.hum for Hum in dht]
     }
@@ -67,7 +67,7 @@ def chart_data_jour(request):
     # Récupérer tous les objets de Module créés au cours des 24 dernières heures
     dht = Dht11.objects.filter(dt__range=(last_24_hours, now))
     data = {
-        'temps': [Dt.dt for Dt in dht],
+        'temps': [Dt.dt.strftime("%H:%M") for Dt in dht],
         'temperature': [Temp.temp for Temp in dht],
         'humidity': [Hum.hum for Hum in dht]
     }
@@ -85,7 +85,7 @@ def chart_data_semaine(request):
     dht = Dht11.objects.filter(dt__gte=derniere_semaine)
 
     data = {
-        'temps': [Dt.dt for Dt in dht],
+        'temps': [Dt.dt.strftime("%d/%m") for Dt in dht],
         'temperature': [Temp.temp for Temp in dht],
         'humidity': [Hum.hum for Hum in dht]
     }
@@ -104,7 +104,7 @@ def chart_data_mois(request):
     dht = Dht11.objects.filter(dt__gte=derniere_semaine)
 
     data = {
-        'temps': [Dt.dt for Dt in dht],
+        'temps': [Dt.dt.strftime("%d/%m") for Dt in dht],
         'temperature': [Temp.temp for Temp in dht],
         'humidity': [Hum.hum for Hum in dht]
     }

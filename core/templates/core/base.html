@@ -6,9 +6,10 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css"  rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+        <script src="https://kit.fontawesome.com/2849d571f5.js" crossorigin="anonymous"></script>
         <title>{% block title %} {% endblock %} | Project IOT</title>
     </head>
-    <body class="bg-slate-100">
+    <body class="bg-white">
         <nav class="px-6 py-6 flex justify-between bg-cyan-200 items-center border-b border-gray-200">
                 <a href="/" class="text-xl font-semibold">Project IOT</a>
 
@@ -36,8 +37,10 @@
 
 
                     {% if request.user.is_authenticated %}
-                    <a href="#" class="px-6 py-3 text-base font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-600">Inbox</a>
+                    <!-- <a href="#" class="px-6 py-3 text-base font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-600">Inbox</a>
                     <a href="" class="px-6 py-3 text-base font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Dashboard</a>
+                    -->
+                    <a href="{% url 'core:logout' %}" class="px-6 py-3 text-base font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Logout</a>
                     {% else %}
                     <a href="{% url 'core:signup' %}" class="px-6 py-3 text-base font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-600">Sign up</a>
                     <a href="{% url 'core:login' %}" class="px-6 py-3 text-base font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Log in</a>

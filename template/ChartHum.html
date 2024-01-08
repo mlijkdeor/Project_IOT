@@ -5,7 +5,7 @@
 
 <div class="graphique">
     <div class="navb p-6 m-6 flex justify-center">
-
+        <button  id="general-link" class="p-6 m-6 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Historique général </button>
         <button id="aujourdhui-link" class=" p-6 m-6 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Historique d'Aujourd'hui</button>
         <button  id="semaine-link"  class="p-6 m-6 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Historique de cette semaine</button>
         <button  id="mois-link" class="p-6 m-6 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Historique de ce mois</button>
@@ -23,65 +23,21 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 <script>
 
+    const generalLink = document.getElementById('general-link');
   const aujourdhuiLink = document.getElementById('aujourdhui-link');
   const semaineLink = document.getElementById('semaine-link');
   const moisLink = document.getElementById('mois-link');
   aujourdhuiLink.addEventListener('click', () => {
-    fetch('/chart-data-jour/')
-        .then(response => response.json())
-        .then(data => {
-            var labels = data.temps;
-             var dataValues = data.temperature;
-            var startIndex = labels.length - 27;
-            if (startIndex < 0) startIndex = 0;
-            labels = labels.slice(startIndex);
-            dataValues = dataValues.slice(startIndex);
-            var ctx = document.getElementById('graphique-temp').getContext('2d');
-            var myChart = new Chart(ctx, 
-            {
 
-                type: 'line',
-                data: {
-                labels: labels,
-                    datasets: [{
-                        label: 'Temperature values',
-                        data: dataValues,
-                        backgroundColor: 'rgb(255, 182, 193)',
-                        borderColor: 'white' ,
-                        borderWidth: 2,
-                        pointStyle: 'circles',
-                        pointRadius: 2,
-                        pointBorderColor: 'red'
-                    }]
-                },
-                options: 
-                {
-                    scales: 
-                    {
-                    yAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                                callback: function (value,index,values){
-                                    return value +'°';
-                                }
-                            }
-                        }],
-                        xAxes:[{
-                            ticks: {
-                                beginAtZero: true,
-                                display:false
-                                }
-                        }]  
-                    }
-                }
-            });
-        });
         fetch('/chart-data-jour/')
         .then(response => response.json())
         .then(data => {
-            var labels = data.temps;
+
+               var labels = data.temps;
+
+
              var dataValues = data.humidity;
-            var startIndex = labels.length - 27;
+            var startIndex = labels.length - dataValues.length;
             if (startIndex < 0) startIndex = 0;
             labels = labels.slice(startIndex);
             dataValues = dataValues.slice(startIndex);
@@ -98,7 +54,7 @@
                         borderWidth: 2,
                         pointStyle: 'circles',
                         pointRadius: 2,
-                        pointBorderColor: 'red'
+                        pointBorderColor: '#FF647F',
                     }]
                 },
                 options: {
@@ -117,71 +73,23 @@
                             ticks: 
                             {
                                 beginAtZero: true,
-                                display:false
+                                display:true
                             }
                         }]
                     }   
                 }
             });
         });
-    });
+  });
 
     semaineLink.addEventListener('click', () => {
-    fetch('/chart-data-semaine/')
-        .then(response => response.json())
-        .then(data => {
-            var labels = data.temps;
-             var dataValues = data.temperature;
-            var startIndex = labels.length - 27;
-            if (startIndex < 0) startIndex = 0;
-            labels = labels.slice(startIndex);
-            dataValues = dataValues.slice(startIndex);
-            var ctx = document.getElementById('graphique-temp').getContext('2d');
-            var myChart = new Chart(ctx, 
-            {
 
-                type: 'line',
-                data: {
-                labels: labels,
-                    datasets: [{
-                        label: 'Temperature values',
-                        data: dataValues,
-                        backgroundColor: 'rgb(255, 182, 193)',
-                        borderColor: 'white' ,
-                        borderWidth: 2,
-                        pointStyle: 'circles',
-                        pointRadius: 2,
-                        pointBorderColor: 'red'
-                    }]
-                },
-                options: 
-                {
-                    scales: 
-                    {
-                    yAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                                callback: function (value,index,values){
-                                    return value +'°';
-                                }
-                            }
-                        }],
-                        xAxes:[{
-                            ticks: {
-                                beginAtZero: true,
-                                display:true
-                                }
-                        }]  
-                    }
-                }
-            });
-        });
         fetch('/chart-data-semaine/')
         .then(response => response.json())
         .then(data => {
             var labels = data.temps;
              var dataValues = data.humidity;
-            var startIndex = labels.length - 27;
+            var startIndex = labels.length - dataValues.length;
             if (startIndex < 0) startIndex = 0;
             labels = labels.slice(startIndex);
             dataValues = dataValues.slice(startIndex);
@@ -198,7 +106,7 @@
                         borderWidth: 2,
                         pointStyle: 'circles',
                         pointRadius: 2,
-                        pointBorderColor: 'red'
+                        pointBorderColor: '#FF647F'
                     }]
                 },
                 options: {
@@ -228,61 +136,13 @@
 
 
     moisLink.addEventListener('click', () => {
-    fetch('/chart-data-mois/')
-        .then(response => response.json())
-        .then(data => {
-            var labels = data.temps;
-             var dataValues = data.temperature;
-            var startIndex = labels.length - 27;
-            if (startIndex < 0) startIndex = 0;
-            labels = labels.slice(startIndex);
-            dataValues = dataValues.slice(startIndex);
-            var ctx = document.getElementById('graphique-temp').getContext('2d');
-            var myChart = new Chart(ctx, 
-            {
 
-                type: 'line',
-                data: {
-                labels: labels,
-                    datasets: [{
-                        label: 'Temperature values',
-                        data: dataValues,
-                        backgroundColor: 'rgb(255, 182, 193)',
-                        borderColor: 'white' ,
-                        borderWidth: 2,
-                        pointStyle: 'circles',
-                        pointRadius: 2,
-                        pointBorderColor: 'red'
-                    }]
-                },
-                options: 
-                {
-                    scales: 
-                    {
-                    yAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                                callback: function (value,index,values){
-                                    return value +'°';
-                                }
-                            }
-                        }],
-                        xAxes:[{
-                            ticks: {
-                                beginAtZero: true,
-                                display:true
-                                }
-                        }]  
-                    }
-                }
-            });
-        });
         fetch('/chart-data-mois/')
         .then(response => response.json())
         .then(data => {
             var labels = data.temps;
              var dataValues = data.humidity;
-            var startIndex = labels.length - 27;
+            var startIndex = labels.length - dataValues.length;
             if (startIndex < 0) startIndex = 0;
             labels = labels.slice(startIndex);
             dataValues = dataValues.slice(startIndex);
@@ -299,7 +159,7 @@
                         borderWidth: 2,
                         pointStyle: 'circles',
                         pointRadius: 2,
-                        pointBorderColor: 'red'
+                        pointBorderColor: '#FF647F'
                     }]
                 },
                 options: {
@@ -332,62 +192,13 @@
 
 
 
-    fetch('/chart-data/')
-        .then(response => response.json())
-        .then(data => {
-            var labels = data.temps;
-
-             var dataValues = data.temperature;
-            var startIndex = labels.length - 20;
-            if (startIndex < 0) startIndex = 0;
-            labels = labels.slice(startIndex);
-            dataValues = dataValues.slice(startIndex);
-            var ctx = document.getElementById('graphique-temp').getContext('2d');
-            var myChart = new Chart(ctx, 
-            {
-
-                type: 'line',
-                data: {
-                labels: labels,
-                    datasets: [{
-                        label: 'Temperature values',
-                        data: dataValues,
-                        backgroundColor: 'rgb(255, 182, 193)',
-                        borderColor: 'white' ,
-                        borderWidth: 2,
-                        pointStyle: 'circles',
-                        pointRadius: 2,
-                        pointBorderColor: 'red'
-                    }]
-                },
-                options: 
-                {
-                    scales: 
-                    {
-                    yAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                                callback: function (value,index,values){
-                                    return value +'°';
-                                }
-                            }
-                        }],
-                        xAxes:[{
-                            ticks: {
-                                beginAtZero: true,
-                                display:true
-                                }
-                        }]  
-                    }
-                }
-            });
-        });
+    generalLink.addEventListener('click', () => {
         fetch('/chart-data/')
         .then(response => response.json())
         .then(data => {
             var labels = data.temps;
              var dataValues = data.humidity;
-            var startIndex = labels.length - 27;
+            var startIndex = labels.length - dataValues.length;
             if (startIndex < 0) startIndex = 0;
             labels = labels.slice(startIndex);
             dataValues = dataValues.slice(startIndex);
@@ -404,7 +215,7 @@
                         borderWidth: 2,
                         pointStyle: 'circles',
                         pointRadius: 2,
-                        pointBorderColor: 'red'
+                        pointBorderColor: '#FF647F'
                     }]
                 },
                 options: {
@@ -430,7 +241,57 @@
                 }
             });
         });
-        
+    });
+
+    fetch('/chart-data/')
+        .then(response => response.json())
+        .then(data => {
+            var labels = data.temps;
+             var dataValues = data.humidity;
+            var startIndex = labels.length - dataValues.length;
+            if (startIndex < 0) startIndex = 0;
+            labels = labels.slice(startIndex);
+            dataValues = dataValues.slice(startIndex);
+            var ctx = document.getElementById('graphique-hum').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Humidity values',
+                        data: dataValues,
+                        backgroundColor: 'rgb(255, 182, 193)',
+                        borderColor: 'white' ,
+                        borderWidth: 2,
+                        pointStyle: 'circles',
+                        pointRadius: 2,
+                        pointBorderColor: '#FF647F'
+                    }]
+                },
+                options: {
+                    scales: {
+
+                        yAxes: [{
+                            ticks:
+                        {
+                                beginAtZero: true,
+                                callback: function (value,index,values){
+                                    return value +'%';
+                                },
+                        }
+                        }],
+                        xAxes:[{
+                            ticks:
+                            {
+                                beginAtZero: true,
+                                display:true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+
 </script>
 
 </div>
