@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+
 {% block title %}
 Tables
 {% endblock %}
@@ -57,6 +58,27 @@ Tables
     </table>
 </div>
     <br>
+    <div class="flex flex-col items-center">
+  <!-- Help text -->
+
+
+
+  <!-- Buttons -->
+  <div class="inline-flex mt-2 xs:mt-0">
+      {% if derniere_ligne.has_previous %}
+      <a href="{% url 'DHT:table' %}?page={{derniere_ligne.previous_page_number}}" class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          Prev
+      </a>
+      {% endif %}
+      {% if derniere_ligne.has_next %}
+      <a href="{% url 'DHT:table' %}?page={{derniere_ligne.next_page_number}}" class="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          Next
+      </a>
+      {% endif %}
+  </div>
+</div>
+
+
     <div>
 <a href="{% url 'DHT:download_csv' %}"  class="m-4 px-6 py-3 text-base font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700" >Télecharger csv</a>
 </div>

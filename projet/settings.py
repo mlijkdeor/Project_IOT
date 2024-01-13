@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+BOT_TOKEN = '6839204935:AAFARN17ouANf-_3yUBeoojzcKiRyjs1Gig'
+BOT_URL="https://api.telegram.org/bot%s/"%BOT_TOKEN
+BOT_CHAT_ID='6049497254'
+
 LOGIN_URL= '/login/'
 LOGIN_REDIRECT_URL= '/'
 LOGOUT_REDIRECT_URL= '/'

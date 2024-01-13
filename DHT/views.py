@@ -9,6 +9,9 @@ from django.utils import timezone
 from django.http import JsonResponse
 from datetime import timedelta
 from datetime import datetime
+from django.core.paginator import Paginator
+
+
 
 def table(request):
     derniere_ligne = Dht11.objects.all()
@@ -19,8 +22,15 @@ def table(request):
         temps_ecoule = ' il y a ' + str(difference_minutes) + ' min'
         if difference_minutes > 60:
             temps_ecoule = 'il y a' + str(difference_minutes // 60) + 'h ' + str(difference_minutes % 60) + 'min'
+    p=Paginator(derniere_ligne,7)
+    page_num=request.GET.get('page',1)
 
-    return render(request, 'value.html', {'derniere_ligne': derniere_ligne})
+    try:
+        page=p.page(page_num)
+    except EmptyPage:
+        page=p.page(1)
+
+    return render(request, 'value.html', {'derniere_ligne': page, 'num':page_num})
 
 
 def download_csv(request):
